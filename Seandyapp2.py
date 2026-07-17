@@ -3,11 +3,10 @@ Tel-U Jakarta Assistant - Chatbot Virtual Asisten Telkom University Jakarta
 Proyek Akhir Pelatihan - Aplikasi Chatbot Sederhana
 
 Cara jalankan:
->>> streamlit run Seandyapp2.py
+>>> streamlit run app.py
 
-Catatan:
-- Butuh GOOGLE_API_KEY (Gemini API key) untuk berjalan.
-- Logo resmi harus berada di assets/telu-jakarta-logo.png (satu folder dengan app.py).
+Butuh GOOGLE_API_KEY (Gemini API key). Logo resmi harus berada di
+assets/telu-jakarta-logo.png (satu folder dengan app.py).
 """
 
 import os
@@ -44,17 +43,14 @@ st.markdown(
             --tel-bg: #FAFAFA;
         }
 
-        /* Background halaman */
         .stApp {
             background: linear-gradient(180deg, #FAFAFA 0%, #F1F1F1 100%);
         }
 
-        /* Sembunyikan header bawaan streamlit yang polos */
         header[data-testid="stHeader"] {
             background: transparent;
         }
 
-        /* Banner judul */
         .tuj-header {
             background: linear-gradient(120deg, var(--tel-red) 0%, var(--tel-maroon) 100%);
             padding: 1.4rem 1.6rem;
@@ -92,14 +88,12 @@ st.markdown(
             margin: 0.2rem 0 1.2rem 0;
         }
 
-        /* Chat bubble user */
         [data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) {
             background: #F0F0F0;
             border-radius: 14px;
             border: 1px solid #E2E2E2;
         }
 
-        /* Chat bubble AI */
         [data-testid="stChatMessage"]:has(img) {
             background: #FFFFFF;
             border-left: 4px solid var(--tel-red);
@@ -107,7 +101,6 @@ st.markdown(
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        /* Tombol */
         .stButton > button, .stChatInput button {
             background-color: var(--tel-red) !important;
             color: white !important;
@@ -118,7 +111,6 @@ st.markdown(
             background-color: var(--tel-maroon) !important;
         }
 
-        /* Sidebar */
         [data-testid="stSidebar"] {
             background: linear-gradient(180deg, #1A1A1A 0%, #2B2B2B 100%);
         }
@@ -132,7 +124,6 @@ st.markdown(
             border-color: #444 !important;
         }
 
-        /* Caption footer */
         .tuj-footer {
             text-align: center;
             color: var(--tel-gray);
@@ -140,7 +131,6 @@ st.markdown(
             margin-top: 1.5rem;
         }
 
-        /* Kartu logo di sidebar */
         .tuj-sidebar-logo {
             background: #FFFFFF;
             border-radius: 12px;
@@ -184,13 +174,13 @@ else:
     st.title("Tel-U Jakarta Assistant")
 
 st.markdown(
-    '<p class="tuj-tagline">"Contribution To The Nation" &mdash; Tanya seputar kampus, '
+    '<p class="tuj-tagline">"Contribute to the World" &mdash; Tanya seputar kampus, '
     "akademik, dan pendaftaran di Telkom University Jakarta</p>",
     unsafe_allow_html=True,
 )
 
 # ============================================================
-# SIDEBAR - INFO CEPAT
+# SIDEBAR
 # ============================================================
 with st.sidebar:
     if LOGO_PATH.exists():
@@ -226,16 +216,12 @@ with st.sidebar:
 # ============================================================
 # API KEY
 # ============================================================
-# Saat di-deploy ke Streamlit Community Cloud, API key sebaiknya disimpan di
-# menu "Secrets" (bukan diketik manual tiap kali). Baris di bawah ini otomatis
-# mengambilnya dari st.secrets kalau tersedia; kalau tidak ada (mis. saat run
-# lokal tanpa secrets.toml), akan lanjut ke kolom input manual seperti biasa.
 if os.environ.get("GOOGLE_API_KEY") is None:
     try:
         if "GOOGLE_API_KEY" in st.secrets:
             os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
     except Exception:
-        pass  # st.secrets belum dikonfigurasi (wajar saat run lokal) -> lanjut ke input manual
+        pass
 
 if os.environ.get("GOOGLE_API_KEY") is None:
     st.markdown("**Masukkan API Key Gemini untuk mulai chat**")
@@ -257,21 +243,12 @@ if os.environ.get("GOOGLE_API_KEY") is None:
 
 client = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite")
 
-# Aktifkan Google Search grounding: model bisa mencari info terkini di internet
-# secara real-time sebelum menjawab, bukan hanya mengandalkan pengetahuan bawaan
-# atau teks yang di-hardcode di SYSTEM_PROMPT di bawah.
-# tool_choice="auto" -> model sendiri yang putuskan kapan perlu search (hemat kuota).
-# Kalau mau paksa search di SETIAP pesan (lebih akurat tapi jauh lebih boros kuota
-# gratis), ganti jadi tool_choice="any" -- tapi siap-siap lebih sering kena 429.
 SEARCH_GROUNDING_ENABLED = True
 if SEARCH_GROUNDING_ENABLED:
     client = client.bind_tools([{"google_search": {}}], tool_choice="auto")
 
 # ============================================================
-# SYSTEM PROMPT - PENGETAHUAN TEL-U JAKARTA
-# ============================================================
-# ============================================================
-# KNOWLEDGE BASE (dimuat dari file terpisah, mudah diedit tanpa sentuh kode)
+# SYSTEM PROMPT & KNOWLEDGE BASE
 # ============================================================
 KB_PATH = Path(__file__).parent / "knowledge_base.md"
 
@@ -354,33 +331,20 @@ except Exception as e:
     error_text = str(e)
     if "API_KEY_INVALID" in error_text or "API key not valid" in error_text:
         friendly_msg = (
-            "⚠️ **API Key tidak valid.** Sepertinya Gemini API key yang dipakai "
-            "salah atau sudah tidak aktif. Silakan buat/verifikasi key baru di "
+            "⚠️ **API Key tidak valid.** Silakan buat/verifikasi key baru di "
             "[Google AI Studio](https://aistudio.google.com/apikey), lalu restart "
-            "aplikasi ini sepenuhnya (stop & jalankan ulang `streamlit run`) "
-            "sebelum mencoba lagi."
+            "aplikasi sebelum mencoba lagi."
         )
     elif "RESOURCE_EXHAUSTED" in error_text or "429" in error_text:
         friendly_msg = (
-            "⚠️ **Kuota API sedang habis (429).** Ini bukan error kode, tapi batas "
-            "pemakaian gratis Gemini API yang tercapai — bisa jadi sisa pemakaian "
-            "sebelumnya saat search grounding masih dipaksa jalan di setiap pesan.\n\n"
-            "- Kalau ini limit **per menit**, biasanya pulih sendiri dalam **~1 menit**.\n"
-            "- Kalau ini limit **harian**, resetnya mengikuti tengah malam Waktu "
-            "Pasifik AS (kira-kira siang/sore hari berikutnya kalau di WIB) — "
-            "mengganti pengaturan kode TIDAK memulihkan kuota yang sudah kepakai "
-            "hari ini, kuotanya baru pulih setelah waktu reset itu.\n\n"
-            "Cek detail kuota & plan Anda di [Google AI Studio → API Keys]"
-            "(https://aistudio.google.com/app/apikey). Kalau butuh langsung bisa "
-            "dipakai sekarang tanpa nunggu, pertimbangkan aktifkan billing untuk "
-            "kuota yang jauh lebih besar."
+            "⚠️ **Kuota API sedang habis.** Coba lagi beberapa saat lagi, atau cek "
+            "status kuota di [Google AI Studio](https://aistudio.google.com/app/apikey)."
         )
     else:
         friendly_msg = (
             "⚠️ Terjadi kendala saat menghubungi model AI. Silakan coba lagi "
             "sebentar lagi. Detail teknis: `" + error_text[:200] + "`"
         )
-    # Buang pesan user yang gagal diproses supaya tidak nyangkut di history
     st.session_state["chat_history"].pop()
     with st.chat_message("AI", avatar=ai_avatar):
         st.markdown(friendly_msg)
