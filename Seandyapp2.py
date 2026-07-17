@@ -244,6 +244,7 @@ if os.environ.get("GOOGLE_API_KEY") is None:
 
 client = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite")
 
+# Set False untuk nonaktifkan Google Search grounding (1 pesan = 1 API call polos)
 SEARCH_GROUNDING_ENABLED = True
 if SEARCH_GROUNDING_ENABLED:
     client = client.bind_tools([{"google_search": {}}], tool_choice="auto")
@@ -326,7 +327,7 @@ st.session_state["chat_history"].append(HumanMessage(user_prompt))
 with st.chat_message("User", avatar="🧑"):
     st.markdown(user_prompt)
 
-MIN_SECONDS_BETWEEN_REQUESTS = 4  # jaga di bawah ~15 request/menit (limit RPM free tier)
+MIN_SECONDS_BETWEEN_REQUESTS = 6  # jaga di bawah 10 request/menit
 MAX_RETRIES = 2
 RETRY_DELAY_SECONDS = 20
 
