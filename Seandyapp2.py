@@ -246,7 +246,7 @@ if os.environ.get("GOOGLE_API_KEY") is None:
 client = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite")
 
 # Set False untuk nonaktifkan Google Search grounding (1 pesan = 1 API call polos)
-SEARCH_GROUNDING_ENABLED = True
+SEARCH_GROUNDING_ENABLED = False
 if SEARCH_GROUNDING_ENABLED:
     client = client.bind_tools([{"google_search": {}}], tool_choice="auto")
 
