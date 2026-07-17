@@ -260,12 +260,12 @@ client = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite")
 # Aktifkan Google Search grounding: model bisa mencari info terkini di internet
 # secara real-time sebelum menjawab, bukan hanya mengandalkan pengetahuan bawaan
 # atau teks yang di-hardcode di SYSTEM_PROMPT di bawah.
-# tool_choice="any" memaksa model MELAKUKAN pencarian di setiap giliran jawab,
-# bukan menyerahkan keputusan "perlu cari atau tidak" ke model (yang sering kali
-# terlalu percaya diri dengan pengetahuan bawaannya dan malah tidak mencari).
+# tool_choice="auto" -> model sendiri yang putuskan kapan perlu search (hemat kuota).
+# Kalau mau paksa search di SETIAP pesan (lebih akurat tapi jauh lebih boros kuota
+# gratis), ganti jadi tool_choice="any" -- tapi siap-siap lebih sering kena 429.
 SEARCH_GROUNDING_ENABLED = True
 if SEARCH_GROUNDING_ENABLED:
-    client = client.bind_tools([{"google_search": {}}], tool_choice="any")
+    client = client.bind_tools([{"google_search": {}}], tool_choice="auto")
 
 # ============================================================
 # SYSTEM PROMPT - PENGETAHUAN TEL-U JAKARTA
@@ -359,6 +359,21 @@ except Exception as e:
             "[Google AI Studio](https://aistudio.google.com/apikey), lalu restart "
             "aplikasi ini sepenuhnya (stop & jalankan ulang `streamlit run`) "
             "sebelum mencoba lagi."
+        )
+    elif "RESOURCE_EXHAUSTED" in error_text or "429" in error_text:
+        friendly_msg = (
+            "⚠️ **Kuota API sedang habis (429).** Ini bukan error kode, tapi batas "
+            "pemakaian gratis Gemini API yang tercapai — kemungkinan besar karena "
+            "search grounding sekarang aktif di SETIAP pesan (`tool_choice=\"any\"`), "
+            "yang menghabiskan kuota jauh lebih cepat dari biasanya.\n\n"
+            "- Kalau ini limit **per menit**, biasanya pulih sendiri dalam **~1 menit**.\n"
+            "- Kalau ini limit **harian**, resetnya mengikuti tengah malam Waktu "
+            "Pasifik AS (kira-kira siang/sore hari berikutnya kalau di WIB).\n\n"
+            "Cek detail kuota & plan Anda di [Google AI Studio → API Keys]"
+            "(https://aistudio.google.com/app/apikey). Kalau sering kena limit ini, "
+            "pertimbangkan ganti `tool_choice=\"any\"` jadi `\"auto\"` di `app.py` "
+            "supaya search hanya jalan saat benar-benar perlu, atau aktifkan billing "
+            "untuk kuota lebih besar."
         )
     else:
         friendly_msg = (
