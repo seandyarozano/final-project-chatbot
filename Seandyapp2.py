@@ -363,17 +363,17 @@ except Exception as e:
     elif "RESOURCE_EXHAUSTED" in error_text or "429" in error_text:
         friendly_msg = (
             "⚠️ **Kuota API sedang habis (429).** Ini bukan error kode, tapi batas "
-            "pemakaian gratis Gemini API yang tercapai — kemungkinan besar karena "
-            "search grounding sekarang aktif di SETIAP pesan (`tool_choice=\"any\"`), "
-            "yang menghabiskan kuota jauh lebih cepat dari biasanya.\n\n"
+            "pemakaian gratis Gemini API yang tercapai — bisa jadi sisa pemakaian "
+            "sebelumnya saat search grounding masih dipaksa jalan di setiap pesan.\n\n"
             "- Kalau ini limit **per menit**, biasanya pulih sendiri dalam **~1 menit**.\n"
             "- Kalau ini limit **harian**, resetnya mengikuti tengah malam Waktu "
-            "Pasifik AS (kira-kira siang/sore hari berikutnya kalau di WIB).\n\n"
+            "Pasifik AS (kira-kira siang/sore hari berikutnya kalau di WIB) — "
+            "mengganti pengaturan kode TIDAK memulihkan kuota yang sudah kepakai "
+            "hari ini, kuotanya baru pulih setelah waktu reset itu.\n\n"
             "Cek detail kuota & plan Anda di [Google AI Studio → API Keys]"
-            "(https://aistudio.google.com/app/apikey). Kalau sering kena limit ini, "
-            "pertimbangkan ganti `tool_choice=\"any\"` jadi `\"auto\"` di `app.py` "
-            "supaya search hanya jalan saat benar-benar perlu, atau aktifkan billing "
-            "untuk kuota lebih besar."
+            "(https://aistudio.google.com/app/apikey). Kalau butuh langsung bisa "
+            "dipakai sekarang tanpa nunggu, pertimbangkan aktifkan billing untuk "
+            "kuota yang jauh lebih besar."
         )
     else:
         friendly_msg = (
