@@ -10,6 +10,7 @@ assets/telu-jakarta-logo.png (satu folder dengan app.py).
 """
 
 import os
+import threading
 import time
 from pathlib import Path
 
@@ -327,34 +328,40 @@ st.session_state["chat_history"].append(HumanMessage(user_prompt))
 with st.chat_message("User", avatar="🧑"):
     st.markdown(user_prompt)
 
-MIN_SECONDS_BETWEEN_REQUESTS = 6  # jaga di bawah 10 request/menit
+MIN_SECONDS_BETWEEN_REQUESTS = 6  # jaga di bawah 10 request/menit, berlaku untuk SEMUA pengunjung
 MAX_RETRIES = 2
 RETRY_DELAY_SECONDS = 20
 
-if "last_request_time" not in st.session_state:
-    st.session_state["last_request_time"] = 0.0
 
-elapsed = time.time() - st.session_state["last_request_time"]
-if elapsed < MIN_SECONDS_BETWEEN_REQUESTS:
-    time.sleep(MIN_SECONDS_BETWEEN_REQUESTS - elapsed)
+@st.cache_resource
+def get_global_rate_limiter():
+    return {"last_request_time": 0.0, "lock": threading.Lock()}
+
+
+rate_limiter = get_global_rate_limiter()
 
 response = None
 error_text = ""
-for attempt in range(MAX_RETRIES + 1):
-    try:
-        st.session_state["last_request_time"] = time.time()
-        response = client.invoke(st.session_state["chat_history"])
-        break
-    except Exception as e:
-        error_text = str(e)
-        is_rate_limit = "RESOURCE_EXHAUSTED" in error_text or "429" in error_text
-        if is_rate_limit and attempt < MAX_RETRIES:
-            with st.spinner(
-                f"Kuota API sedang penuh, mencoba lagi dalam {RETRY_DELAY_SECONDS} detik..."
-            ):
-                time.sleep(RETRY_DELAY_SECONDS)
-            continue
-        break
+with rate_limiter["lock"]:
+    elapsed = time.time() - rate_limiter["last_request_time"]
+    if elapsed < MIN_SECONDS_BETWEEN_REQUESTS:
+        time.sleep(MIN_SECONDS_BETWEEN_REQUESTS - elapsed)
+
+    for attempt in range(MAX_RETRIES + 1):
+        try:
+            rate_limiter["last_request_time"] = time.time()
+            response = client.invoke(st.session_state["chat_history"])
+            break
+        except Exception as e:
+            error_text = str(e)
+            is_rate_limit = "RESOURCE_EXHAUSTED" in error_text or "429" in error_text
+            if is_rate_limit and attempt < MAX_RETRIES:
+                with st.spinner(
+                    f"Kuota API sedang penuh, mencoba lagi dalam {RETRY_DELAY_SECONDS} detik..."
+                ):
+                    time.sleep(RETRY_DELAY_SECONDS)
+                continue
+            break
 
 if response is None:
     if "API_KEY_INVALID" in error_text or "API key not valid" in error_text:
@@ -365,9 +372,9 @@ if response is None:
         )
     elif "RESOURCE_EXHAUSTED" in error_text or "429" in error_text:
         friendly_msg = (
-            "⚠️ **Kuota API masih penuh setelah beberapa kali dicoba ulang.** Ini "
-            "biasanya batas jumlah request per menit (RPM), bukan kuota harian — "
-            "tunggu 1-2 menit lalu kirim pesan lagi, atau cek status kuota di "
+            "⚠️ **Kuota API sedang habis.** Bisa jadi batas per menit (biasanya pulih "
+            "dalam 1-2 menit) atau batas harian (reset mengikuti tengah malam Waktu "
+            "Pasifik AS). Cek jenis kuota yang tersentuh dan sisa kuotanya di "
             "[Google AI Studio](https://aistudio.google.com/app/apikey)."
         )
     else:
