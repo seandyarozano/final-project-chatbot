@@ -1,0 +1,15 @@
+# Jangan upload secrets/API key ke GitHub!
+.streamlit/secrets.toml
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Cache python
+__pycache__/
+*.pyc
+
+# File OS
+.DS_Store
+Thumbs.db
