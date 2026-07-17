@@ -6,7 +6,7 @@ Cara jalankan:
 >>> streamlit run Seandyapp2.py
 
 Butuh GOOGLE_API_KEY (Gemini API key). Logo resmi harus berada di
-assets/telu-jakarta-logo.png (satu folder dengan app.py).
+assets/telu-jakarta-logo.png (satu folder dengan Seandyapp2.py).
 """
 
 import os
@@ -23,6 +23,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 # ============================================================
 ASSETS_DIR = Path(__file__).parent / "assets"
 LOGO_PATH = ASSETS_DIR / "telu-jakarta-logo.png"
+AVATAR_LOGO_PATH = ASSETS_DIR / "telu-jakarta-logo-avatar.png"
 
 st.set_page_config(
     page_title="Tel-U Jakarta Assistant",
@@ -95,12 +96,22 @@ st.markdown(
             border-radius: 14px;
             border: 1px solid #E2E2E2;
         }
+        [data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) * {
+            color: var(--tel-dark) !important;
+        }
 
         [data-testid="stChatMessage"]:has(img) {
             background: #FFFFFF;
             border-left: 4px solid var(--tel-red);
             border-radius: 14px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        [data-testid="stChatMessage"]:has(img) * {
+            color: var(--tel-dark) !important;
+        }
+        [data-testid="stChatMessage"]:has(img) a {
+            color: var(--tel-maroon) !important;
+            font-weight: 600;
         }
 
         .stButton > button, .stChatInput button {
@@ -261,21 +272,13 @@ def load_knowledge_base() -> str:
         return KB_PATH.read_text(encoding="utf-8")
     return (
         "(knowledge_base.md tidak ditemukan — mohon buat file itu di folder yang "
-        "sama dengan app.py agar chatbot punya data kampus.)"
+        "sama dengan Seandyapp2.py agar chatbot punya data kampus.)"
     )
 
 
-SYSTEM_PROMPT = f"""
-Kamu adalah "Tel-U Jakarta Assistant", asisten virtual resmi untuk civitas dan calon
-mahasiswa Telkom University Jakarta (Tel-U Jakarta / TUJ). Jawab selalu dalam Bahasa
-Indonesia, ramah, sopan, singkat (maksimal 1 paragraf kecuali diminta detail lebih).
-
-=== DATA & FAKTA TENTANG TEL-U JAKARTA (sumber: knowledge_base.md) ===
-{load_knowledge_base()}
-=== AKHIR DATA ===
-
-ATURAN PENTING:
-1. Kamu punya akses tool google_search untuk mencari info real-time. UNTUK PERTANYAAN
+# Rule #1 otomatis mengikuti SEARCH_GROUNDING_ENABLED
+if SEARCH_GROUNDING_ENABLED:
+    RULE_REALTIME = """1. Kamu punya akses tool google_search untuk mencari info real-time. UNTUK PERTANYAAN
    tentang hal berikut, kamu WAJIB memanggil tool google_search terlebih dahulu sebelum
    menjawab — JANGAN langsung menjawab dari ringkasan umum di bagian PROFIL di atas:
    - Daftar/nama program studi yang tersedia
@@ -287,7 +290,27 @@ ATURAN PENTING:
    kalau ada). Kalau hasil pencarian tetap tidak jelas/tidak ditemukan, baru katakan
    jujur dan arahkan ke jakarta.telkomuniversity.ac.id atau smb.telkomuniversity.ac.id.
    Untuk keputusan penting (bayar biaya, deadline daftar), tetap tambahkan imbauan
-   singkat untuk konfirmasi ulang ke sumber resmi karena info bisa berubah sewaktu-waktu.
+   singkat untuk konfirmasi ulang ke sumber resmi karena info bisa berubah sewaktu-waktu."""
+else:
+    RULE_REALTIME = """1. Kamu TIDAK punya akses pencarian real-time saat ini (mode prototipe). Untuk
+   pertanyaan tentang program studi, biaya kuliah (UP3/SDP2/BPP), jadwal pendaftaran,
+   beasiswa, atau berita/kegiatan kampus terbaru: jawab HANYA berdasarkan ringkasan di
+   bagian DATA & FAKTA di atas. Jika detail yang ditanyakan (angka pasti, tanggal pasti,
+   ketersediaan terbaru) tidak ada di data tersebut, JANGAN mengarang atau menebak —
+   katakan jujur bahwa kamu tidak punya info pasti/terbaru, lalu arahkan ke
+   jakarta.telkomuniversity.ac.id atau smb.telkomuniversity.ac.id untuk kepastian."""
+
+SYSTEM_PROMPT = f"""
+Kamu adalah "Tel-U Jakarta Assistant", asisten virtual resmi untuk civitas dan calon
+mahasiswa Telkom University Jakarta (Tel-U Jakarta / TUJ). Jawab selalu dalam Bahasa
+Indonesia, ramah, sopan, singkat (maksimal 1 paragraf kecuali diminta detail lebih).
+
+=== DATA & FAKTA TENTANG TEL-U JAKARTA (sumber: knowledge_base.md) ===
+{load_knowledge_base()}
+=== AKHIR DATA ===
+
+ATURAN PENTING:
+{RULE_REALTIME}
 2. Jika kamu tidak yakin atau tidak punya data tentang sesuatu, jangan mengarang. Katakan
    dengan jujur bahwa kamu tidak punya info pasti dan arahkan ke kontak resmi kampus atau
    bagian admisi/PMB.
@@ -302,7 +325,7 @@ ATURAN PENTING:
 if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = [SystemMessage(SYSTEM_PROMPT)]
 
-ai_avatar = str(LOGO_PATH) if LOGO_PATH.exists() else "🎓"
+ai_avatar = str(AVATAR_LOGO_PATH) if AVATAR_LOGO_PATH.exists() else "🎓"
 
 for chat in st.session_state["chat_history"]:
     if type(chat) is SystemMessage:
