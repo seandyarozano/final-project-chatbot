@@ -3,13 +3,14 @@ Tel-U Jakarta Assistant - Chatbot Virtual Asisten Telkom University Jakarta
 Proyek Akhir Pelatihan - Aplikasi Chatbot Sederhana
 
 Cara jalankan:
->>> streamlit run app.py
+>>> streamlit run Seandyapp2.py
 
 Butuh GOOGLE_API_KEY (Gemini API key). Logo resmi harus berada di
 assets/telu-jakarta-logo.png (satu folder dengan app.py).
 """
 
 import os
+import time
 from pathlib import Path
 
 import streamlit as st
@@ -174,7 +175,7 @@ else:
     st.title("Tel-U Jakarta Assistant")
 
 st.markdown(
-    '<p class="tuj-tagline">"Contribute to the World" &mdash; Tanya seputar kampus, '
+    '<p class="tuj-tagline">"Creating the Future" &mdash; Tanya seputar kampus, '
     "akademik, dan pendaftaran di Telkom University Jakarta</p>",
     unsafe_allow_html=True,
 )
@@ -325,10 +326,36 @@ st.session_state["chat_history"].append(HumanMessage(user_prompt))
 with st.chat_message("User", avatar="🧑"):
     st.markdown(user_prompt)
 
-try:
-    response = client.invoke(st.session_state["chat_history"])
-except Exception as e:
-    error_text = str(e)
+MIN_SECONDS_BETWEEN_REQUESTS = 4  # jaga di bawah ~15 request/menit (limit RPM free tier)
+MAX_RETRIES = 2
+RETRY_DELAY_SECONDS = 20
+
+if "last_request_time" not in st.session_state:
+    st.session_state["last_request_time"] = 0.0
+
+elapsed = time.time() - st.session_state["last_request_time"]
+if elapsed < MIN_SECONDS_BETWEEN_REQUESTS:
+    time.sleep(MIN_SECONDS_BETWEEN_REQUESTS - elapsed)
+
+response = None
+error_text = ""
+for attempt in range(MAX_RETRIES + 1):
+    try:
+        st.session_state["last_request_time"] = time.time()
+        response = client.invoke(st.session_state["chat_history"])
+        break
+    except Exception as e:
+        error_text = str(e)
+        is_rate_limit = "RESOURCE_EXHAUSTED" in error_text or "429" in error_text
+        if is_rate_limit and attempt < MAX_RETRIES:
+            with st.spinner(
+                f"Kuota API sedang penuh, mencoba lagi dalam {RETRY_DELAY_SECONDS} detik..."
+            ):
+                time.sleep(RETRY_DELAY_SECONDS)
+            continue
+        break
+
+if response is None:
     if "API_KEY_INVALID" in error_text or "API key not valid" in error_text:
         friendly_msg = (
             "⚠️ **API Key tidak valid.** Silakan buat/verifikasi key baru di "
@@ -337,8 +364,10 @@ except Exception as e:
         )
     elif "RESOURCE_EXHAUSTED" in error_text or "429" in error_text:
         friendly_msg = (
-            "⚠️ **Kuota API sedang habis.** Coba lagi beberapa saat lagi, atau cek "
-            "status kuota di [Google AI Studio](https://aistudio.google.com/app/apikey)."
+            "⚠️ **Kuota API masih penuh setelah beberapa kali dicoba ulang.** Ini "
+            "biasanya batas jumlah request per menit (RPM), bukan kuota harian — "
+            "tunggu 1-2 menit lalu kirim pesan lagi, atau cek status kuota di "
+            "[Google AI Studio](https://aistudio.google.com/app/apikey)."
         )
     else:
         friendly_msg = (
