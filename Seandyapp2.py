@@ -3,7 +3,7 @@ Tel-U Jakarta Assistant - Chatbot Virtual Asisten Telkom University Jakarta
 Proyek Akhir Pelatihan - Aplikasi Chatbot Sederhana
 
 Cara jalankan:
->>> streamlit run app.py
+>>> streamlit run Seandyapp2.py
 
 Catatan:
 - Butuh GOOGLE_API_KEY (Gemini API key) untuk berjalan.
