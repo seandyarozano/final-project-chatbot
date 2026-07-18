@@ -280,10 +280,10 @@ A: Ya, beberapa alumni membagikan pengalaman mereka bekerja di berbagai perusaha
 **Q: Apa contoh profesi yang bisa ditekuni lulusan Tel-U Jakarta?**
 A: Contohnya meliputi engineer telekomunikasi, spesialis IT, analis/konsultan sistem informasi, hingga desainer visual/kreatif, tergantung program studi yang diambil.
 
-## K. Layanan Mahasiswa & Kontak
+## K. Layanan Mahasiswa & 
 
 **Q: Bagaimana cara menghubungi Tel-U Jakarta untuk pertanyaan umum?**
-A: Cara paling aman adalah melalui situs resmi jakarta.telkomuniversity.ac.id atau kanal SMB di smb.telkomuniversity.ac.id, karena nomor kontak per unit bisa berubah.
+A: Cara paling aman adalah melalui situs resmi jakarta.telkomuniversity.ac.id atau kanal SMB di smb.telkomuniversity.ac.id, karena nomor  per unit bisa berubah.
 
 **Q: Apa website resmi Tel-U Jakarta?**
 A: https://jakarta.telkomuniversity.ac.id
@@ -615,7 +615,7 @@ A: Akses WiFi asrama tidak dikelola oleh PuTI, melainkan oleh pengelola asrama m
 
 ---
 
-**Kontak IT Service Desk PuTI (untuk kendala yang tidak tercakup di atas):**
-- WhatsApp: 082319949941
+**Kontak IT Service Desk PuTI Jakarta (untuk kendala yang tidak tercakup di atas):**
+- WhatsApp: 081319800200
 - Portal FAQ resmi: https://servicedesk.telkomuniversity.ac.id/halaman-faqs/
 - Portal Panduan (User Manual) resmi: https://servicedesk.telkomuniversity.ac.id/usermanual/
