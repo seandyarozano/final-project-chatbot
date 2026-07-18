@@ -2,13 +2,23 @@
 
 > **Catatan sumber & batasan (penting, jangan dihapus):**
 > Isi di bawah ini disusun dari informasi publik resmi (situs jakarta.telkomuniversity.ac.id,
-> smb.telkomuniversity.ac.id, dan dokumentasi Universitas Telkom) yang diverifikasi pada
-> **Juli 2026**. Untuk hal yang sifatnya sering berubah — **biaya kuliah, jadwal pendaftaran,
-> nominal beasiswa, dan daftar program studi per kampus** — file ini SENGAJA tidak
-> mencantumkan angka/tanggal pasti, karena info tersebut mudah kedaluwarsa. Untuk hal-hal
+> smb.telkomuniversity.ac.id, servicedesk.telkomuniversity.ac.id, dan dokumentasi Universitas Telkom)
+> yang diverifikasi pada **Juli 2026**. Untuk hal yang sifatnya sering berubah — **biaya kuliah,
+> jadwal pendaftaran, nominal beasiswa, dan daftar program studi per kampus** — file ini SENGAJA
+> tidak mencantumkan angka/tanggal pasti, karena info tersebut mudah kedaluwarsa. Untuk hal-hal
 > itu, chatbot harus tetap mengarahkan ke sumber resmi (lihat bagian Kontak), bukan menjawab
 > dari angka di file ini. Prodi per kampus (khusus Kampus B/Halimun) belum bisa diverifikasi
 > lengkap dari sumber yang tersedia — arahkan ke situs resmi jika ditanya detail ini.
+>
+> Bagian N–S (Layanan IT / PuTI) disusun dari FAQ resmi Pusat Teknologi Informasi Telkom University
+> di servicedesk.telkomuniversity.ac.id, ditelusuri Juli 2026. Isinya berlaku untuk seluruh kampus
+> Telkom University (termasuk Tel-U Jakarta) karena layanan IT (SSO, iGracias, Microsoft 365, MyTelU
+> Mobile, dll) dikelola terpusat oleh PuTI, bukan per kampus. Bagian ini BUKAN daftar lengkap —
+> portal aslinya punya ratusan entri dan terus diperbarui; beberapa kategori teknis (Seputar Lisensi
+> hosting/server, Seputar Sistem, Strategis, WordPress) sengaja tidak disertakan karena lebih
+> menyasar admin/developer internal, bukan pengguna kampus umum. Untuk kendala spesifik atau info
+> paling baru, arahkan ke servicedesk.telkomuniversity.ac.id/halaman-faqs/ atau WhatsApp IT Service
+> Desk di 082319949941.
 
 ## A. Profil & Identitas Institusi
 
@@ -291,7 +301,7 @@ A: Pertanyaan akademik umumnya ditangani oleh unit akademik/BSLA (dahulu BAA) di
 A: Urusan wisuda dan legalisasi biasanya ditangani unit BSLA (Bagian Sistem Layanan Akademik) Universitas Telkom.
 
 **Q: Apakah ada layanan IT/service desk kampus?**
-A: Ya, Universitas Telkom memiliki IT Service Desk untuk membantu kebutuhan teknis terkait sistem akademik dan layanan digital kampus.
+A: Ya, Universitas Telkom memiliki IT Service Desk (di bawah Pusat Teknologi Informasi/PuTI) untuk membantu kebutuhan teknis terkait sistem akademik dan layanan digital kampus — lihat bagian N–S di bawah untuk kumpulan FAQ layanan IT.
 
 **Q: Bagaimana cara mendapatkan surat keterangan mahasiswa aktif?**
 A: Permintaan surat semacam ini umumnya diajukan melalui unit akademik/kemahasiswaan (LAAK) di fakultas/program studi masing-masing.
@@ -323,3 +333,289 @@ A: Sebaiknya hubungi langsung bagian admisi/PMB Telkom University Jakarta melalu
 
 **Q: Apakah chatbot ini bisa memproses pendaftaran mahasiswa baru secara langsung?**
 A: Tidak. Chatbot ini hanya memberi informasi umum; proses pendaftaran resmi tetap harus dilakukan melalui portal SITU Admission di smb.telkomuniversity.ac.id.
+
+## N. Akun & Autentikasi (SSO, iGracias, MFA/2FA)
+
+**Q: Apa itu SSO dan apa bedanya dengan akun iGracias?**
+A: SSO (Single Sign-On) adalah sistem satu akun untuk mengakses berbagai portal aplikasi Telkom University, termasuk iGracias. Jadi iGracias adalah salah satu aplikasi yang diakses memakai akun SSO, bukan sistem akun yang terpisah.
+
+**Q: Bagaimana prosedur pengajuan akun SSO untuk pegawai/dosen baru?**
+A: Pengajuan dilakukan melalui jalur kepegawaian; untuk detail lengkap dan dokumen yang diperlukan, hubungi IT Service Desk PuTI via WhatsApp.
+
+**Q: Bagaimana cara mengganti password SSO?**
+A: Bisa dilakukan mandiri lewat Tel-U SATU (satu.telkomuniversity.ac.id): pilih "Connect with Microsoft 365", klik ikon profil di kanan atas, pilih "Ubah Sandi", lalu verifikasi lewat OTP SMS/WhatsApp.
+
+**Q: Bagaimana jika lupa password akun SSO?**
+A: Reset lewat halaman utama Tel-U SATU, pilih "Lupa Sandi?", masukkan Username SSO dan NIK, lalu verifikasi lewat OTP SMS/WhatsApp.
+
+**Q: Password SSO wajib diganti berkala tidak?**
+A: Ya, password SSO wajib diganti tiap 6 bulan sekali; ini salah satu penyebab umum aplikasi (misalnya Microsoft Teams) meminta login ulang mendadak.
+
+**Q: Kenapa saya menerima banyak kode OTP Microsoft padahal tidak sedang login?**
+A: Belum tentu akun diretas — kondisi ini biasanya menandakan ada percobaan login ke akun tersebut. Selama OTP tidak dibagikan ke siapa pun dan tidak ada permintaan login yang disetujui, akses yang berhasil belum tentu terjadi. Jika mencurigakan, segera ganti password SSO dan hubungi IT Service Desk.
+
+**Q: Kenapa kode OTP WhatsApp tidak muncul di WhatsApp Web?**
+A: Untuk alasan keamanan, kode OTP WhatsApp hanya ditampilkan di perangkat utama (HP yang dipakai mendaftarkan akun WhatsApp), tidak muncul di versi web/desktop.
+
+**Q: Bagaimana cara aktivasi 2FA/MFA iGracias menggunakan Secret Key?**
+A: Hubungi IT Service Desk via WhatsApp untuk minta secret key, terima kode lewat SMS/email, lalu masukkan ke aplikasi Authenticator (Google/Microsoft Authenticator) untuk menghasilkan token login.
+
+**Q: Bisakah aktivasi MFA dilakukan tanpa aplikasi Authenticator di HP?**
+A: Bisa, sebagai alternatif gunakan ekstensi Authenticator di browser Chrome/Chromium-based lainnya di desktop.
+
+**Q: Bagaimana cara aktivasi MFA iGracias secara mandiri tanpa menghubungi Service Desk?**
+A: Login iGracias, buka menu Pengaturan Akun > Apps-Auth Setting, pilih Generate QR Code, lalu scan kode tersebut dengan aplikasi Microsoft/Google Authenticator di HP.
+
+**Q: Token di aplikasi Authenticator saya tidak bisa dipakai untuk login, kenapa?**
+A: Biasanya karena jam/tanggal di perangkat tidak sinkron. Pastikan pengaturan waktu perangkat (Windows atau HP) diatur otomatis mengikuti zona waktu yang benar.
+
+**Q: Token iGracias via SMS tidak terkirim, harus bagaimana?**
+A: Gunakan opsi "Send via WA" untuk menerima token lewat nomor WhatsApp yang terdaftar di iGracias. Jika nomor WA yang terdaftar sudah berbeda, hubungi IT Service Desk untuk pembaruan.
+
+**Q: Bagaimana cara mengubah nomor HP untuk pengiriman token iGracias?**
+A: Jika masih bisa login iGracias, dapat diubah mandiri. Jika tidak bisa login sama sekali, pegawai/dosen perlu menghubungi bagian SDM Pusat untuk dibantu mengubah nomor.
+
+**Q: Bagaimana login iGracias memakai token Authenticator (bukan SMS/WA)?**
+A: Di halaman login iGracias, pilih role Mahasiswa/Dosen-Pegawai, lalu di halaman Send Token klik toggle "A-Auth", masukkan kode dari aplikasi Authenticator di kolom yang tersedia.
+
+**Q: Gagal login iGracias dengan notifikasi "[LDAP] USERNAME AND PASSWORD NOT CORRECT OR NOT MATCH!", apa penyebabnya?**
+A: Umumnya karena kombinasi username/password SSO yang salah atau password sudah kedaluwarsa (lewat 6 bulan). Jika sudah yakin data benar, hubungi IT Service Desk.
+
+**Q: Siapa yang bisa mengajukan penambahan Grup Pengguna (User Group) baru di iGracias?**
+A: Permintaan hanya dapat diproses jika diajukan oleh Kepala Urusan terkait melalui aplikasi IT Service Desk, bukan oleh individu pengguna biasa.
+
+**Q: Bagaimana cara pengajuan UG (User Group) Admin Prodi untuk Kaprodi/Sekprodi?**
+A: Diajukan melalui Nota Dinas (NDE) ke bagian Akademik terlebih dahulu, baru kemudian diproses UG-nya.
+
+**Q: Kartu Tanda Mahasiswa (KTM) saya hilang atau rusak, bisa dicetak ulang?**
+A: Bisa; pembuatan ulang KTM ditangani oleh BSLA (Bagian Sistem Layanan Akademik), bukan oleh PuTI.
+
+**Q: KTM/kartu pegawai saya tidak bisa dipakai untuk membuka gate parkir, harus bagaimana?**
+A: Ini di luar kewenangan PuTI — hubungi Direktorat Logistik dan Aset.
+
+## O. Microsoft 365, Email, dan OneDrive
+
+**Q: Siapa saja yang berhak mendapatkan lisensi Microsoft Office 365 dari kampus?**
+A: Seluruh pegawai tetap (dosen/TPA) dan mahasiswa aktif berhak mendapat lisensi Office 365 Education, menggunakan username sesuai iGracias (format @telkomuniversity.ac.id untuk dosen/TPA dan @student.telkomuniversity.ac.id untuk mahasiswa) dengan password yang sama seperti password SSO.
+
+**Q: Di mana bisa mengunduh Microsoft Office 365 resmi dari kampus?**
+A: Lewat office.com atau portal app-pack.telkomuniversity.ac.id, menggunakan akun institusi. Sebelum instal, pastikan tidak ada aplikasi Office lain yang sudah terpasang agar tidak konflik.
+
+**Q: Apakah harus menghapus Office bawaan Windows sebelum instal Office 365 Education kampus?**
+A: Disarankan menghapus dulu untuk meminimalkan potensi konflik antara dua versi Office yang berjalan bersamaan.
+
+**Q: Kenapa muncul notifikasi "We need you to sign in again..." di Microsoft Teams?**
+A: Biasanya dipicu oleh perubahan akses akun, seperti pergantian password SSO (wajib tiap 6 bulan). Solusinya cukup login ulang ke Teams memakai password baru.
+
+**Q: Bagaimana cara memakai Microsoft Teams untuk gabung rapat tanpa punya akun?**
+A: Buka undangan rapat lewat link Teams yang dibagikan, lalu pilih opsi untuk melanjutkan tanpa login/akun (guest access) di halaman web yang muncul.
+
+**Q: Mahasiswa tidak bisa melihat tugas ("View Assignment") di Teams, kenapa?**
+A: Biasanya karena pengaturan akses tugas oleh dosen masih dibatasi ke "siswa saat ini" saja. Dosen perlu mengubah pengaturan agar mencakup siswa baru yang bergabung setelah tugas dibuat.
+
+**Q: Bagaimana cara login email/Outlook Telkom University?**
+A: Akses office.com lewat browser, klik Sign In, lalu masukkan email institusi (format @telkomuniversity.ac.id atau @student.telkomuniversity.ac.id) beserta password SSO.
+
+**Q: Berapa batas jumlah pengiriman email di Outlook.com/Microsoft 365?**
+A: Outlook menerapkan batas jumlah pengiriman harian untuk mencegah penyalahgunaan oleh spammer; batas persisnya berbeda untuk pengguna Microsoft 365 dibanding akun gratis, dan bisa berubah sewaktu-waktu — cek panduan resmi PuTI untuk angka terbaru.
+
+**Q: Bagaimana cara recall (menarik kembali) email yang sudah terkirim di Outlook?**
+A: Buka folder Sent Items, buka email yang ingin ditarik di jendela baru (dobel klik), lalu pilih menu titik tiga di pojok kanan atas dan cari opsi Recall pada bagian Actions. Fitur ini hanya berjalan efektif jika penerima juga memakai Outlook dan belum membuka emailnya.
+
+**Q: Kenapa akun Microsoft 365 saya tidak konek meski akun SSO sudah berhasil dibuat?**
+A: Kemungkinan perangkat masih terhubung ke akun Microsoft 365 dari institusi/kantor sebelumnya. Perlu sign out dari akun lama terlebih dahulu sebelum sign in dengan akun kampus yang baru.
+
+**Q: Bagaimana cara ganti nomor telepon terdaftar di akun Microsoft 365?**
+A: Akses halaman Security Info di akun Microsoft, pada bagian Phone pilih Change, lalu ikuti instruksi di layar.
+
+**Q: Bagaimana cara ganti foto profil di akun Microsoft?**
+A: Kunjungi office.com, cari menu "Delve", lalu di menu "Saya" unggah/edit foto profil yang diinginkan.
+
+**Q: Apakah lisensi Microsoft Copilot dari kampus bisa dipakai sebagai add-on di aplikasi desktop?**
+A: Tidak. Lisensi Copilot dari Telkom University hanya untuk versi education yang diakses lewat browser, halaman utama Office, atau Bing — tidak bisa diintegrasikan ke aplikasi desktop.
+
+**Q: Bagaimana cara mengecek kapasitas storage OneDrive saya?**
+A: Bisa lewat browser (buka onedrive.office.com, login dengan akun SSO, kapasitas terlihat di bagian kiri bawah) atau lewat aplikasi OneDrive Desktop.
+
+**Q: Kenapa ukuran file yang tersimpan di OneDrive lebih besar dari ukuran file aslinya?**
+A: Ini bukan bug — biasanya disebabkan oleh fitur Version History (riwayat versi) yang menyimpan setiap perubahan file, sehingga total storage yang terpakai lebih besar dari ukuran file terkini saja.
+
+**Q: Bagaimana cara login dan sinkronisasi (sync) OneDrive Desktop?**
+A: Buka aplikasi OneDrive Desktop, login menggunakan akun institusi (bukan akun Microsoft pribadi), lalu aktifkan sinkronisasi agar file di perangkat otomatis sesuai dengan versi di cloud.
+
+**Q: Bagaimana cara menghapus folder/file di OneDrive lewat aplikasi desktop (bukan website)?**
+A: Buka aplikasi OneDrive di PC/Mac, cari folder/file yang dimaksud, lalu hapus langsung dari situ — penghapusan folder secara massal tidak selalu bisa dilakukan lewat versi website OneDrive.
+
+**Q: Kenapa muncul error saat mengunduh file zip dari OneDrive lewat website?**
+A: Error "Compressed Zipped Folder" ini bisa dipengaruhi beberapa faktor teknis di sisi browser/koneksi. Alternatifnya, gunakan aplikasi OneDrive Desktop untuk backup/unduh file, bukan lewat browser.
+
+**Q: Bagaimana cara membagikan (share) file/folder OneDrive ke orang lain?**
+A: Buka OneDrive, pilih file/folder yang ingin dibagikan, pilih opsi "Share", lalu atur jenis akses link (misalnya siapa saja dengan link bisa melihat) sebelum menyalin dan mengirim link tersebut.
+
+**Q: Bagaimana cara mengatasi "Unlicensed Product" pada Microsoft Office?**
+A: Umumnya disebabkan aplikasi belum ter-aktivasi dengan akun institusi yang benar; pastikan sign in memakai akun @telkomuniversity.ac.id atau @student.telkomuniversity.ac.id, bukan akun Microsoft pribadi.
+
+**Q: Bagaimana cara instal aplikasi Microsoft Office 365 di laptop pribadi?**
+A: Tersedia panduan resmi terpisah untuk Windows dan macOS di situs PuTI/IT Service Desk, dapat diakses lewat tautan pendek tel-u.ac.id/instalasiofficewin (Windows) dan tel-u.ac.id/instalasiofficemac (Mac).
+
+**Q: Bagaimana cara menambahkan add-in Mendeley Cite di Microsoft Word?**
+A: Buka Word, klik menu "Add-ins" di menu bar (atau cari lewat kolom pencarian), lalu cari dan tambahkan "Mendeley Cite" dari galeri add-in.
+
+**Q: Bagaimana cara membuat Microsoft Forms untuk keperluan kampus?**
+A: Login ke akun Microsoft 365 institusi, buka menu titik sembilan di pojok kiri atas, pilih Forms, lalu klik "Formulir Baru" untuk mulai membuat.
+
+**Q: Bagaimana cara memindahkan aplikasi Authenticator dari HP lama ke HP baru?**
+A: Ada prosedur migrasi resmi (biasanya lewat fitur backup akun di aplikasi Authenticator itu sendiri atau menghubungi IT Service Desk untuk re-generate secret key) agar token tidak hilang saat ganti perangkat.
+
+**Q: Bagaimana cara mengecek status BitLocker di laptop yang terhubung akun institusi?**
+A: Ada panduan cepat resmi dari PuTI untuk mengecek apakah BitLocker sudah dikelola (managed) oleh akun kampus; hubungi IT Service Desk jika perlu detail langkah lengkap.
+
+**Q: Kenapa muncul pesan "Managed By Your Organization" di Windows padahal saya sudah tidak berafiliasi dengan institusi lama?**
+A: Perangkat masih terhubung ke akun kerja/sekolah (work or school account) dari institusi sebelumnya. Solusinya: buka Settings > Accounts > Access work or school, pilih akun lama, lalu disconnect, sebelum login ulang dengan akun kampus yang baru.
+
+**Q: Apa itu Azure Dev Tools for Education dan siapa yang bisa memakainya?**
+A: Layanan dari Microsoft yang berisi akses kursus online dan unduhan software Microsoft (format installer + serial number), tersedia untuk dosen/TPA dan mahasiswa lewat portal azureforeducation.microsoft.com/devtools menggunakan akun institusi.
+
+**Q: Kenapa daftar software di Azure Dev Tools saya cuma menampilkan 5 item?**
+A: Ini biasanya keterbatasan tampilan/filter bawaan di portal Azure, bukan berarti hanya 5 software yang tersedia — coba gunakan fitur pencarian di portal untuk software spesifik yang dicari.
+
+**Q: Bagaimana cara klaim lisensi Microsoft Visio dari kampus?**
+A: Akses azureforeducation.microsoft.com/devtools, sign in memakai akun SSO institusi, cari "Visio" di kolom pencarian, lalu pilih versi yang diinginkan untuk diunduh.
+
+**Q: Bagaimana cara scan malware/virus di laptop Windows kampus?**
+A: Gunakan aplikasi bawaan Windows Security: buka aplikasinya, pilih "Virus & threat protection", klik "Quick scan", lalu ikuti rekomendasi yang muncul setelah proses selesai.
+
+**Q: Bagaimana cara reset password login Windows tanpa kehilangan data?**
+A: Ada prosedur teknis lewat menu Troubleshoot > Advanced Options di layar recovery Windows; karena langkahnya cukup teknis dan berisiko jika salah, disarankan berkonsultasi dulu dengan IT Service Desk sebelum mencoba sendiri.
+
+**Q: Bagaimana cara migrasi rekaman (records) dari Microsoft Stream Classic setelah dinonaktifkan?**
+A: Layanan Stream (Classic) sudah ditutup sejak 15 April 2024 dan kontennya yang tidak dimigrasi akan terhapus. Karena keterbatasan storage kampus, migrasi umumnya diarahkan ke penyimpanan pribadi pengguna (misalnya OneDrive) — cek panduan resmi PuTI untuk langkah lengkapnya.
+
+## P. Aplikasi Akademik Lain (iGracias & Layanan Terkait)
+
+**Q: CeLOE (LMS) di iGracias tidak menampilkan course untuk mata kuliah tertentu, kenapa?**
+A: Biasanya karena mahasiswa/dosen belum ter-enroll pada mata kuliah tersebut di sistem.
+
+**Q: Bagaimana cara mengatasi mata kuliah yang tidak muncul/belum ter-enroll di LMS?**
+A: Tersedia beberapa opsi self-enroll melalui iGracias (untuk dosen maupun mahasiswa), sinkronisasi mata kuliah oleh dosen, atau enroll manual oleh admin LAK lewat CeLOE Dashboard.
+
+**Q: Apa itu aplikasi DELA dan siapa yang bisa memakainya?**
+A: DELA (Document Legalization Application) adalah platform untuk legalisasi ijazah dan transkrip nilai bagi alumni, diakses lewat portal iGracias dengan user group Alumni (otomatis aktif setelah mahasiswa lulus).
+
+**Q: Bagaimana cara mengakses e-journal dan e-book kampus dari luar jaringan kampus?**
+A: Lewat platform MyLOFT yang disediakan Open Library Telkom University, sivitas akademika bisa mengakses database jurnal/buku internasional tanpa harus terhubung ke jaringan internal kampus.
+
+**Q: Kenapa jumlah SKS di transkrip nilai dan KHS berbeda untuk mahasiswa program Fasttrack?**
+A: Bukan kesalahan sistem — transkrip mencakup total SKS termasuk mata kuliah program fasttrack (S2), sementara KHS umumnya hanya menampilkan SKS dari program studi utama (S1).
+
+**Q: Ijazah dan transkrip nilai sekarang berbentuk fisik atau elektronik?**
+A: Sejak transformasi digital layanan akademik, Telkom University tidak lagi menerbitkan ijazah fisik; dokumen kelulusan disahkan secara elektronik, mengacu pada Permendikbudristek No. 6 Tahun 2022.
+
+**Q: Kelas yang saya inginkan sudah penuh kuotanya, apa yang bisa dilakukan?**
+A: Hubungi program studi masing-masing untuk menanyakan kemungkinan penambahan kuota kelas.
+
+**Q: Bagaimana cara mengajukan undur diri sebagai mahasiswa aktif?**
+A: Lewat menu Registrasi > Undur Diri Mahasiswa di iGracias, selama periode registrasi mata kuliah berlangsung. Jika muncul error "data_duplicated", hubungi LAA Fakultas untuk penghapusan data pengajuan yang bentrok.
+
+**Q: Kenapa muncul simbol tanda tanya (??) saat import mata kuliah lama (ekuivalensi) atau kurikulum?**
+A: Biasanya karena file Excel yang diunggah mengandung spasi tersembunyi setelah karakter terakhir; pastikan file sudah "bersih" sebelum diunggah.
+
+**Q: Bagaimana mekanisme pengajuan cuti akademik mahasiswa?**
+A: Ada ketentuan dan pedoman resmi terpisah untuk pengajuan dan pengelolaan cuti akademik — cek halaman Informasi Aturan dan Pedoman Akademik Telkom University untuk detail lengkapnya.
+
+**Q: Bagaimana cara mencetak ulang berita acara/daftar nilai dari periode yang sudah lama berlalu?**
+A: Tersedia di menu Print Resume Status Input Nilai, dapat diakses oleh usergroup Admin LAAK melalui menu Nilai > Status Input Nilai di iGracias.
+
+**Q: Bagaimana cara mencetak KSM (Kartu Studi Mahasiswa) untuk periode/semester sebelumnya?**
+A: Pilih semester yang diinginkan pada menu pilihan semester di bagian kanan atas halaman KSM di iGracias.
+
+**Q: Bagaimana cara mengubah data diri (identitas) mahasiswa di iGracias?**
+A: Tidak bisa diubah mandiri — mahasiswa harus menghubungi bagian akademik fakultas, yang kemudian mengajukan Nota Dinas ke akademik pusat (BSLA) untuk memproses perubahan data.
+
+**Q: Bagaimana cara mengganti foto untuk KTM digital di iGracias/MyTelU?**
+A: Lewat menu Akun > Profilku > Photos di iGracias; hapus dulu foto lama sampai bersih sebelum mengunggah foto baru.
+
+**Q: Bagaimana cara menambahkan dosen sebagai tim pengajar (team teaching) pada suatu mata kuliah?**
+A: Dilakukan oleh Kaprodi lewat iGracias, menu Registrasi > Mata Kuliah > Lihat Mata Kuliah > ikon Tambah di kolom aksi mata kuliah terkait.
+
+**Q: Apa itu aplikasi TAK dan bagaimana jika belum di-approve?**
+A: TAK adalah aplikasi untuk pencatatan Transkrip Aktivitas Kemahasiswaan. Jika pengajuan belum kunjung disetujui, hubungi Direktorat Pengelolaan Mahasiswa (BK) untuk percepatan approval.
+
+**Q: Bagaimana cara mendaftar wisuda dan apa yang dilakukan jika gagal upload foto?**
+A: Pendaftaran dilakukan lewat menu Wisuda > Pendaftaran Wisuda di iGracias (setelah diizinkan oleh LAA Fakultas). Jika upload foto gagal, langkah awal yang disarankan adalah mengganti file foto yang diunggah (format/ukuran berbeda).
+
+**Q: Kapan grup pengguna (user group) iGracias saya otomatis berubah menjadi Alumni?**
+A: Setelah mahasiswa mendaftar wisuda di iGracias dan pendaftarannya disetujui oleh LAAK, user group akan otomatis berubah menjadi Alumni.
+
+**Q: Bagaimana cara mengisi Pra Tracer sebagai syarat pendaftaran wisuda?**
+A: Akses menu Pra Tracer Wisuda > Sensus > Aksi di iGracias. Perlu diisi Career Coach di aplikasi CeLOE terlebih dahulu sebelum Pra Tracer bisa dilanjutkan.
+
+**Q: Bagaimana proses legalisasi ijazah dan transkrip nilai bagi alumni?**
+A: Dilakukan lewat aplikasi DeLa di iGracias, dengan panduan resmi tersedia dari PuTI. Untuk alumni kampus daerah (Jakarta, Surabaya, Purwokerto), koordinasi legalisasi ditangani oleh bagian akademik masing-masing kampus.
+
+## Q. Aplikasi Non-Akademik & Kepegawaian
+
+**Q: Bagaimana cara mengubah data evaluator di aplikasi digi-TRAIN?**
+A: Data evaluator yang tidak sesuai dapat diubah mandiri oleh admin SDM Pusat di aplikasi digi-TRAIN, pada menu Data Penugasan.
+
+**Q: Kenapa kolom evaluator kosong pada penugasan/pelatihan dosen di digi-TRAIN?**
+A: Biasanya karena posisi Ketua Kelompok Keahlian (KK) dosen tersebut masih kosong saat penugasan dibuat; penyesuaian dilakukan oleh Admin SDM Pusat.
+
+**Q: Bagaimana cara pembayaran macet karena tombol "Lanjutkan Pembayaran" tidak bisa diklik?**
+A: Pastikan sudah memilih item pembayaran terlebih dahulu dengan mencentang kolom aksi sebelum tombol tersebut aktif.
+
+**Q: Bagaimana cara mengajukan pembatalan cuti tahunan pegawai?**
+A: Ada prosedur pembatalan resmi di sistem kepegawaian iGracias; untuk perubahan sisa kuota cuti setelah pembatalan, dilakukan lewat penyesuaian tanggal mulai/akhir cuti.
+
+**Q: Apa itu aplikasi RIS dan bagaimana jika template alur SK salah?**
+A: RIS adalah aplikasi untuk pengelolaan Surat Keputusan (SK) internal. Template alur sirkulasi tidak bisa diedit setelah SK mulai disirkulasikan, jadi pengecekan alur harus dilakukan sebelum SK dibuat.
+
+**Q: Bagaimana cara melakukan CheckIn kehadiran pegawai?**
+A: Bisa lewat aplikasi MyTelU Mobile atau lewat website checkin-employee.telkomuniversity.ac.id, login dengan akun SSO, lalu isi status kehadiran dan kesehatan pribadi sebelum klik Check-in.
+
+**Q: Apa itu aplikasi E-MoM dan BaSO?**
+A: E-MoM digunakan untuk pembuatan notulensi rapat secara online, dan BaSO untuk pembuatan surat eksternal secara online. Keduanya diakses lewat SSO di situs situ-sps.telkomuniversity.ac.id.
+
+**Q: Bagaimana cara reset pengisian DTKP (TelU Point)?**
+A: Reset harus diajukan lewat Direktorat SDM, bagian Urusan Data dan Performansi — tidak bisa dilakukan mandiri oleh pegawai.
+
+**Q: Bagaimana caranya agar status SKPI berubah menjadi "Y" (disetujui)?**
+A: Approval SKPI (Surat Keterangan Pendamping Ijazah) ditangani oleh Bagian Kemahasiswaan (BK) bersama Pusat Bahasa (LaC), bukan oleh PuTI.
+
+**Q: Bagaimana alur input Target Kinerja Pegawai (TKP/TelU Point) di iGracias?**
+A: Masuk ke menu Target Kinerja Pegawai dengan grup pengguna Pegawai, isi Objektif, klik Tambah Target Kinerja Pegawai, lalu lengkapi daftar target dan satuannya.
+
+**Q: Ke mana harus bertanya soal surat keterangan mahasiswa atau pengajuan magang?**
+A: Umumnya lewat aplikasi TOSS, namun aplikasi ini tidak dikelola oleh PuTI sehingga kendala teknisnya ditangani pengelola TOSS sendiri, bukan lewat layanan IT Service Desk. Bantuan surat juga bisa lewat LAAK Fakultas.
+
+## R. MyTelU Mobile
+
+**Q: Aplikasi MyTelU Mobile terasa lambat, error, atau gagal login, apa yang bisa dicoba dulu?**
+A: Langkah awal yang disarankan adalah membersihkan cache aplikasi (clear cache) sebelum mencoba langkah lain.
+
+**Q: Saya gagal login MyTelU meski username dan password sudah sesuai SSO, kenapa?**
+A: Pastikan format username yang dimasukkan sudah benar sesuai standar SSO (bukan hanya sebagian nama). Jika masih gagal, hubungi Service Desk dengan menyertakan username, NIM/NIP, dan tangkapan layar kendala.
+
+**Q: Bagaimana cara membuat QR presensi untuk suatu kegiatan lewat MyTelU Dashboard?**
+A: Fitur ini khusus untuk Kepala Urusan/pejabat berwenang di unit/fakultas, diakses lewat mytelumobile.telkomuniversity.ac.id pada menu "Scan QR Presensi" > "Tambah Acara".
+
+**Q: Bagaimana MyTelU Mobile dipakai untuk presensi perkuliahan?**
+A: Ada panduan resmi terpisah untuk dosen dan mahasiswa (tersedia dalam bentuk dokumen PDF dari PuTI) yang menjelaskan alur presensi lewat aplikasi ini.
+
+## S. Jaringan & WiFi Kampus (TUNE / TelU-Connect)
+
+**Q: Apa itu TelU-Connect dan bagaimana cara mengaksesnya?**
+A: TelU-Connect adalah SSID WiFi kampus dengan sistem autentikasi yang berbeda dari SSID generasi sebelumnya (Employee@TelkomUniversity dan TelkomUniversity). Panduan lengkap dan sertifikat jaringan yang diperlukan tersedia di halaman resmi PuTI.
+
+**Q: Perlu instal sertifikat CA untuk konek ke WiFi kampus di perangkat Android/tablet, bagaimana caranya?**
+A: Unduh file sertifikat resmi dari PuTI, lalu ikuti panduan instalasi sertifikat CA di pengaturan perangkat Android (unduh sertifikat > buka Pengaturan > Instal Sertifikat > verifikasi).
+
+**Q: Bagaimana cara mengakses WiFi di asrama kampus?**
+A: Akses WiFi asrama tidak dikelola oleh PuTI, melainkan oleh pengelola asrama masing-masing — hubungi pengelola asrama langsung untuk info aksesnya.
+
+---
+
+**Kontak IT Service Desk PuTI (untuk kendala yang tidak tercakup di atas):**
+- WhatsApp: 082319949941
+- Portal FAQ resmi: https://servicedesk.telkomuniversity.ac.id/halaman-faqs/
+- Portal Panduan (User Manual) resmi: https://servicedesk.telkomuniversity.ac.id/usermanual/
