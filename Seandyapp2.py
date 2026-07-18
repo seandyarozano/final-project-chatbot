@@ -177,7 +177,7 @@ if LOGO_PATH.exists():
             <img src="data:image/png;base64,{logo_b64}" />
             <div class="tuj-header-text">
                 <h1>Tel-U Jakarta Assistant</h1>
-                <p>Virtual Assistant Resmi &mdash; Telkom University Jakarta</p>
+                <p>Prototipe Virtual Assistant &mdash; Telkom University Jakarta</p>
             </div>
         </div>
         """,
