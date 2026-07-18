@@ -18,7 +18,7 @@
 > hosting/server, Seputar Sistem, Strategis, WordPress) sengaja tidak disertakan karena lebih
 > menyasar admin/developer internal, bukan pengguna kampus umum. Untuk kendala spesifik atau info
 > paling baru, arahkan ke servicedesk.telkomuniversity.ac.id/halaman-faqs/ atau WhatsApp IT Service
-> Desk di 082319949941.
+> Desk di 082319949941 dan Whatsapp IT Helpdesk Jakarta di 081319800200.
 
 ## A. Profil & Identitas Institusi
 
